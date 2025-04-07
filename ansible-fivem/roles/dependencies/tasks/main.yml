@@ -1,0 +1,13 @@
+- name: Install required packages
+  apt:
+    name:
+      - git
+      - curl
+      - screen
+      - unzip
+      - mariadb-server
+      - python3-pymysql
+      - python3-pip
+      - python3-dev
+    state: present
+    update_cache: yes

@@ -1,0 +1,13 @@
+- name: Create fivem user
+  user:
+    name: fivemuser
+    shell: /bin/bash
+    create_home: yes
+
+- name: Create server-data directory
+  file:
+    path: /home/fivemuser/server-data
+    state: directory
+    owner: fivemuser
+    group: fivemuser
+    mode: "0755"

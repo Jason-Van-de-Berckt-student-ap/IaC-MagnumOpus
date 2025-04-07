@@ -1,0 +1,35 @@
+- name: Ensure /opt/fivem directory exists
+  file:
+    path: /opt/fivem
+    state: directory
+    owner: fivemuser
+    group: fivemuser
+    mode: "0755"
+
+- name: Download FXServer artifacts
+  get_url:
+    url: https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/7290-a654bcc2adfa27c4e020fc915a1a6343c3b4f921/fx.tar.xz
+    dest: /tmp/fivem.zip
+
+- name: Unzip FXServer
+  unarchive:
+    src: /tmp/fivem.zip
+    dest: /opt/fivem
+    remote_src: yes
+
+- name: Set permissions
+  file:
+    path: /opt/fivem
+    owner: fivemuser
+    group: fivemuser
+
+- name: Copy default server.cfg
+  copy:
+    dest: /home/fivemuser/server-data/server.cfg
+    content: |
+      sv_hostname "My FXServer"
+      sv_licenseKey "{{license}}"
+      endpoint_add_tcp "0.0.0.0:30120"
+      endpoint_add_udp "0.0.0.0:30120"
+    owner: fivemuser
+    group: fivemuser

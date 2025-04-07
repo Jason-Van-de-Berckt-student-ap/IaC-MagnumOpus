@@ -1,0 +1,24 @@
+- name: Create systemd service
+  copy:
+    dest: /etc/systemd/system/fivem.service
+    content: |
+      [Unit]
+      Description=FXServer
+      After=network.target
+
+      [Service]
+      Type=simple
+      User=fivemuser
+      WorkingDirectory=/home/fivemuser/server-data
+      ExecStart=/opt/fivem/run.sh +exec server.cfg
+      Restart=on-failure
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: Reload systemd and enable service
+  systemd:
+    daemon_reload: yes
+    name: fivem
+    enabled: yes
+    state: started

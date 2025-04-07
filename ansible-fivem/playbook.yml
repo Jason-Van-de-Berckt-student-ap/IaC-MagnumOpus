@@ -1,0 +1,12 @@
+- name: Setup FiveM FXServer
+  hosts: fivem
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+    - user_setup
+    - dependencies
+    - fivem_install
+    - databese
+    - server_management
+    - backup
