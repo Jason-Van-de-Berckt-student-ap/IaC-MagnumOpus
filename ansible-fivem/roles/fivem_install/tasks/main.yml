@@ -9,11 +9,11 @@
 - name: Download FXServer artifacts
   get_url:
     url: https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/7290-a654bcc2adfa27c4e020fc915a1a6343c3b4f921/fx.tar.xz
-    dest: /tmp/fivem.zip
+    dest: /tmp/fivem.tar.xz
 
 - name: Unzip FXServer
   unarchive:
-    src: /tmp/fivem.zip
+    src: /tmp/fivem.tar.xz
     dest: /opt/fivem
     remote_src: yes
 

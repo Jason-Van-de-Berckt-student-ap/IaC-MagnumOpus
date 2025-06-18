@@ -1,13 +1,37 @@
-- name: Install required packages
+- name: Install EPEL repository on RedHat
+  yum:
+    name: epel-release
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Install required packages on Debian/Ubuntu
   apt:
     name:
       - git
       - curl
       - screen
       - unzip
+      - tar
       - mariadb-server
       - python3-pymysql
       - python3-pip
       - python3-dev
     state: present
     update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: Install required packages on RedHat
+  yum:
+    name:
+      - git
+      - curl
+      - screen
+      - unzip
+      - tar
+      - mariadb-server
+      - python3-PyMySQL
+      - python3-pip
+      - python3-devel
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "RedHat"
